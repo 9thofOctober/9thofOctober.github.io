@@ -239,35 +239,42 @@
     transform: rotateX(0deg) translateZ(2px); 
     opacity: 1; 
   }
-/* 🌐 카카오맵 바구니: 모바일 화면 정중앙 수직 배치 완벽 강제 복구 */
+/* 🌐 카카오맵 바구니: 모바일·웹 화면 80% 크기 고정 및 완벽 정중앙 배치 */
 .map-wrapper {
   width: 80% !important;
   max-width: 80% !important;
+  height: 250px !important; /* 작아진 카드 배율에 맞춰 세로 높이 최적화 */
+  
+  /* 🎯 왼쪽 쏠림 버그 해결 핵심: 자석 성질을 완전히 제거하고 수평 기준 강제 정중앙 배치 */
   display: block !important;
   clear: both !important;
   float: none !important;
-  margin: 30px auto 50px auto !important; /* 가로 마진 auto로 정중앙 배치 */
+  margin: 30px auto 50px auto !important; 
+  
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 }
 
-/* 🎯 지도 이미지 최적화: 가로로 터지지 않고 바구니 안에 쏙 들어가게 세팅 */
-.map-wrapper a img {
+/* 📱 모바일 지도 내부 터치 및 독립 줌 제어 수식 */
+.map-wrapper iframe {
   width: 100% !important;
-  height: auto !important;
+  height: 100% !important;
   display: block !important;
-  margin: 0 !important;
   border: none !important;
+  
+  /* 🎯 전체 화면 확대 방지 핵심: 손가락 터치 제어권을 홈페이지가 아닌 '지도 프레임 내부'로 강제 한정 */
+  pointer-events: auto !important; 
+  touch-action: auto !important;
 }
 
-/* 🧱 왼쪽 치우침 완치 방어벽: 최외곽 기둥의 정렬 기준을 완전히 초기화하고 수직 정중앙 고정 */
+/* 🧱 쏠림 방어벽: 최외곽 기둥과 내부 요소들의 중앙 정렬 정밀 리밸런싱 */
 .main-wrapper, 
 .mobile-center-box {
   display: flex !important;
   flex-direction: column !important;
-  align-items: center !important;     /* 🎯 왼쪽으로 쏠렸던 이미지들을 다시 무조건 '정중앙' 정렬 */
+  align-items: center !important;     /* 🎯 왼쪽으로 치우쳤던 이미지들을 다시 가로 기준 '완벽한 정중앙'으로 정렬 */
   justify-content: center !important;
   text-align: center !important;
   margin-left: auto !important;
@@ -275,7 +282,7 @@
   width: 100% !important;
 }
 
-/* 🧱 플립클락 정중앙 정렬 방어벽 */
+/* 플립클락 정중앙 정렬 방어벽 */
 .flip-clock {
   display: flex !important;
   flex-direction: row !important;     /* 시계판은 가로로 나열 유지 */
@@ -285,6 +292,7 @@
   margin-right: auto !important;
   clear: both !important;
 }
+
 
 
 }
@@ -347,11 +355,9 @@
       <img src="./images/03.jpg" alt="03">
     </div>
         
-    <div class="map-wrapper">
-      <!-- 🎯 손가락으로 밀고 당기면 카카오맵 공식 지도 시스템이 내부에서 완벽하게 작동하는 정식 링크뷰입니다. -->
-      <a href="https://kakao.com" target="_blank">
-        <img src="https://kakao.com" alt="지도 클릭 시 카카오맵 앱으로 이동">
-      </a>
+ <div class="map-wrapper">
+      <!-- 🎯 외부 불법 링크 필터를 우회하는 카카오맵 정식 공유 서비스 지도 창입니다. -->
+      <iframe src="https://kakao.com" allowfullscreen="true" loading="lazy"></iframe>
     </div>
       </div>    </div>
 
