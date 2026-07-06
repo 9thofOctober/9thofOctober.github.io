@@ -39,7 +39,6 @@
       margin: 0 auto;
     }
 
-    /* 🖼️ 상단 이미지 정렬 영역 */
     .mobile-center-box {
       width: 100%;
       display: flex; !important;
@@ -57,14 +56,17 @@
       border-radius: 8px;
     }
 
-    /* ⏰ 하단 플립 클락 타이머 영역 */
     .flip-clock {
       display: flex !important;
       justify-content: center !important; /* 💡 타이머 내부 세트들을 정중앙으로 밀집 */
       align-items: center !important;
       width: 100% !important;
-      margin: 20px auto 40px auto !important; /* 💡 타이머 자체를 가로 한가운데 고정 */
+      margin: 20px 0 auto !important; /* 💡 타이머 자체를 가로 한가운데 고정 */
       font-size: 2.2rem;
+	  display: flex !important;
+      clear: both !important; 
+      float: none !important;
+    }
     }
 
     /* 화면이 아주 작은 구형 스마트폰 대응 글자 크기 최적화 수식 */
