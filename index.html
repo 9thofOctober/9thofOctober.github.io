@@ -83,63 +83,74 @@
       margin: 0 6px;
     }
 
-    .flip-clock__slot {
-      font-size: 0.8rem;
-      color: #82835f;
-      margin-top: 8px;
-      font-weight: 700;
-      opacity: 0.9;
-    }
+   /* 💡 여기서부터 복사하세요 */
+.flip-clock__slot {
+  font-size: 0.8rem;
+  color: #82835f;
+  margin-top: 10px; /* 라벨 간격을 조금 넓혔습니다 */
+  font-weight: 700;
+  opacity: 0.9;
+}
 
-    /* 플립 시계판 3D 박스 베이스 */
-    .flip-card {
-      position: relative;
-      width: 1.7em;
-      height: 1.3em;
-      line-height: 1.3em;
-      text-align: center;
-      background: #82835f;
-      color: #f8f4ec;
-      border-radius: 6px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    }
+/* ⚙️ 2.3배 연산 변수 추가 */
+:root {
+  --cardWidth: 1.7em;
+  --cardHeight: 2.3em; /* 💡 세로 길이를 2.3배 늘린 핵심 수치 */
+  --halfHeight: calc(var(--cardHeight) / 2);
+}
 
-    .flip-card__top,
-    .flip-card__bottom {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 50%;
-      overflow: hidden;
-      box-sizing: border-box;
-      backface-visibility: hidden;
-    }
+/* 플립 시계판 3D 박스 베이스 */
+.flip-card {
+  position: relative;
+  width: var(--cardWidth);
+  height: var(--cardHeight); /* 💡 높이 고정값 대신 변수 적용 */
+  background: #82835f;
+  color: #f8f4ec;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
 
-    .flip-card__top {
-      top: 0;
-      border-top-left-radius: 6px;
-      border-top-right-radius: 6px;
-      background: #767756;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
+.flip-card__top,
+.flip-card__bottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+}
 
-    .flip-card__bottom {
-      bottom: 0;
-      border-bottom-left-radius: 6px;
-      border-bottom-right-radius: 6px;
-      line-height: 0;
-    }
+.flip-card__top {
+  top: 0;
+  align-items: flex-start;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background: #767756;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  line-height: var(--cardHeight); /* 💡 줄 높이를 카드 높이와 연동해 정중앙 고정 */
+}
 
-    .flip-card__bottom-inner {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 200%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+.flip-card__bottom {
+  bottom: 0;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.flip-card__bottom-inner {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: var(--cardHeight); /* 💡 기존 고정 200% 배율에서 유연 구조로 변경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(calc(var(--halfHeight) * -1)); /* 💡 늘어난 절반 높이만큼 숫자를 위로 당겨 정중앙 정렬 */
+}
+
   </style>
 </head>
 <body>
