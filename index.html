@@ -92,10 +92,16 @@
   letter-spacing: -0.2px;
 }
 
-/* ⚙️ 세로 2.3배 연산 변수 고정 */
-:root {
-  --cardWidth: 1.7em;
-  --cardHeight: 2.3em;
+--cardWidth: 11vw;     
+  --cardHeight: calc(var(--cardWidth) * 2.3); /* 💡 요청하신 세로 2.3배 비율 정밀 유지 */
+  --halfHeight: calc(var(--cardHeight) / 2);
+}
+
+/* 태블릿 및 PC 화면(가로 768px 이상)에서는 카드가 무한정 커지지 않도록 최대 고정 크기 제한 */
+@media (min-width: 768px) {
+  :root {
+    --cardWidth: 55px; 
+  }
 }
 
 /* 플립 시계판 3D 박스 베이스 및 원근감 주입 */
@@ -111,6 +117,7 @@
   transform-style: preserve-3d;
 }
 
+/* 💡 글자가 미리 바뀌어 보이던 버그 해결을 위해 z-index와 backface 구조 정밀 재배치 */
 .flip-card__top,
 .flip-card__bottom,
 .flip-card__back-top,
@@ -121,7 +128,7 @@
   height: 50%;
   overflow: hidden;
   box-sizing: border-box;
-  backface-visibility: hidden;
+  backface-visibility: hidden; /* 뒤집히는 순간 뒷면을 완벽히 숨김 */
   display: flex;
   justify-content: center;
 }
@@ -159,27 +166,29 @@
   line-height: var(--cardHeight);
 }
 
-/* 🎬 3D 회전축 원점 분할 */
+/* 🎬 3D 회전축 원점 분할 및 앞뒤 겹침 순서(z-index) 버그 수정 */
 .flip-card__top {
   transform-origin: center bottom;
-  z-index: 3;
+  z-index: 4; /* 원래 숫자가 가장 앞에 오도록 배치 */
 }
 
 .flip-card__back-bottom {
   transform-origin: center top;
   transform: rotateX(180deg);
-  z-index: 2;
+  z-index: 3; /* 떨어지는 뒷면 카드가 내려오면서 자연스럽게 덮이도록 배치 */
 }
 
-.flip-card__bottom, .flip-card__back-top { z-index: 1; }
+/* 가만히 대기하는 베이스 카드들은 z-index를 가장 아래로 고정 */
+.flip-card__bottom { z-index: 1; }
+.flip-card__back-top { z-index: 2; }
 
-/* 🎬 낙하 모션 애니메이션 속성 */
+/* 🎬 낙하 모션 애니메이션 속성 (자연스럽게 이어지도록 ease-in-out 결합) */
 .flip .flip-card__top {
-  animation: flipTop 0.35s cubic-bezier(.37,.01,.94,.35) forwards;
+  animation: flipTop 0.35s cubic-bezier(.4, 0, 1, 1) forwards;
 }
 
 .flip .flip-card__back-bottom {
-  animation: flipBottom 0.35s 0.35s cubic-bezier(.15,.45,.28,1) forwards;
+  animation: flipBottom 0.35s 0.35s cubic-bezier(0, 0, .2, 1) forwards;
 }
 
 @keyframes flipTop {
@@ -191,7 +200,6 @@
   0% { transform: rotateX(90deg); }
   100% { transform: rotateX(0deg); }
 }
-
   </style>
 </head>
 <body>
