@@ -1,3 +1,7 @@
 body {
   background-color: #f8f4ec;
 }
+
+html, body {
+  background-color: #f8f4ec !important;
+}
