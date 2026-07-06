@@ -129,7 +129,7 @@
   height: 50%;
   overflow: hidden;
   box-sizing: border-box;
-  backface-visibility: hidden; /* 뒤집히는 순간 뒷면을 완벽히 숨김 */
+  backface-visibility: hidden;
   display: flex;
   justify-content: center;
 }
@@ -167,7 +167,6 @@
   line-height: var(--cardHeight);
 }
 
-/* 🎬 3D 회전축 원점 분할 및 앞뒤 겹침 순서(z-index) 버그 수정 */
 .flip-card__top {
   transform-origin: center bottom;
   z-index: 4; /* 원래 숫자가 가장 앞에 오도록 배치 */
@@ -179,7 +178,6 @@
   z-index: 3; /* 떨어지는 뒷면 카드가 내려오면서 자연스럽게 덮이도록 배치 */
 }
 
-/* 가만히 대기하는 베이스 카드들은 z-index를 가장 아래로 고정 */
 .flip-card__bottom { z-index: 1; }
 .flip-card__back-top { z-index: 2; }
 
@@ -197,7 +195,6 @@
   100% { transform: rotateX(-90deg); }
 }
 
-/* 💡 뒷면 숫자가 먼저 보이던 버그를 고치기 위해 opacity 가림막 시스템 결합 */
 @keyframes flipBottom {
   0% { 
     transform: rotateX(90deg); 
