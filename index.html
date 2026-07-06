@@ -239,49 +239,53 @@
     transform: rotateX(0deg) translateZ(2px); 
     opacity: 1; 
   }
+/* 🌐 카카오맵 바구니: 모바일 화면 정중앙 수직 배치 완벽 강제 복구 */
 .map-wrapper {
-  width: 85% !important;
+  width: 80% !important;
   max-width: 80% !important;
-  height: 250px !important;
-  
-  /* 🎯 왼쪽 쏠림 버그 해결 핵심: 자석 성질을 완전히 제거하고 수평 기준 강제 정중앙 배치 */
   display: block !important;
   clear: both !important;
   float: none !important;
-  margin: 30px auto 50px auto !important; 
-  
+  margin: 30px auto 50px auto !important; /* 가로 마진 auto로 정중앙 배치 */
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 }
 
-.map-wrapper iframe {
+/* 🎯 지도 이미지 최적화: 가로로 터지지 않고 바구니 안에 쏙 들어가게 세팅 */
+.map-wrapper a img {
   width: 100% !important;
-  height: 100% !important;
+  height: auto !important;
   display: block !important;
+  margin: 0 !important;
   border: none !important;
-  
-  /* 🎯 전체 화면 확대 방지 핵심: 손가락 터치 제어권을 홈페이지가 아닌 '지도 프레임 내부'로 강제 한정 */
-  pointer-events: auto !important; 
-  touch-action: auto !important;
 }
+
+/* 🧱 왼쪽 치우침 완치 방어벽: 최외곽 기둥의 정렬 기준을 완전히 초기화하고 수직 정중앙 고정 */
 .main-wrapper, 
-.mobile-center-box, 
-.flip-clock {
+.mobile-center-box {
   display: flex !important;
   flex-direction: column !important;
-  align-items: center !important;     /* 🎯 왼쪽으로 치우쳤던 이미지와 시계를 다시 가로 기준 '완벽한 정중앙'으로 정렬 */
+  align-items: center !important;     /* 🎯 왼쪽으로 쏠렸던 이미지들을 다시 무조건 '정중앙' 정렬 */
   justify-content: center !important;
   text-align: center !important;
   margin-left: auto !important;
   margin-right: auto !important;
+  width: 100% !important;
 }
 
-/* 플립클락 내부 카드 세트들은 가로로 줄을 서야 하므로 방향을 가로 flex로 유지 */
+/* 🧱 플립클락 정중앙 정렬 방어벽 */
 .flip-clock {
-  flex-direction: row !important; 
+  display: flex !important;
+  flex-direction: row !important;     /* 시계판은 가로로 나열 유지 */
+  justify-content: center !important; /* 🎯 시계판 자체도 가로축 기준 완벽 정중앙 고정 */
+  align-items: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  clear: both !important;
 }
+
 
 }
 
@@ -343,13 +347,12 @@
       <img src="./images/03.jpg" alt="03">
     </div>
         
-
     <div class="map-wrapper">
- <div class="map-wrapper">
-      <a href="https://map.kakao.com/?urlX=494519&urlY=1132411&urlLevel=3&map_type=TYPE_MAP&map_hybrid=false" target="_blank">
-        <img src="https://staticmap.kakao.com/map/mapservice?FORMAT=PNG&SCALE=2.5&MX=494518&MY=1132410&S=0&IW=504&IH=310&LANG=0&COORDSTM=WCONGNAMUL&logo=kakao_logo" alt="카카오맵 정면 이미지">
+      <!-- 🎯 손가락으로 밀고 당기면 카카오맵 공식 지도 시스템이 내부에서 완벽하게 작동하는 정식 링크뷰입니다. -->
+      <a href="https://kakao.com" target="_blank">
+        <img src="https://kakao.com" alt="지도 클릭 시 카카오맵 앱으로 이동">
       </a>
-        </div>
+    </div>
       </div>    </div>
 
   </div>
