@@ -239,26 +239,48 @@
     transform: rotateX(0deg) translateZ(2px); 
     opacity: 1; 
   }
-  /* 🌐 카카오맵 80% 축소 및 정중앙 수직 정렬 */
 .map-wrapper {
-  width: 88% !important;        /* 💡 기존 100%에서 요청하신 80% 크기로 정밀 축소 */
+  width: 85% !important;
   max-width: 80% !important;
-  height: 250px !important;     /* 작아진 가로폭에 맞춰 세로 높이도 보기 좋게 조율 */
+  height: 250px !important;
+  
+  /* 🎯 왼쪽 쏠림 버그 해결 핵심: 자석 성질을 완전히 제거하고 수평 기준 강제 정중앙 배치 */
   display: block !important;
-  clear: both !important;       /* 3번 이미지 밑으로 정렬 고정 */
-  margin: 20px auto 40px auto !important; /* 가로 마진 auto로 정중앙 정렬 */
-  border-radius: 8px;           /* 둥근 테두리 효과 */
+  clear: both !important;
+  float: none !important;
+  margin: 30px auto 50px auto !important; 
+  
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 }
 
-/* 지도 내부 화면이 바구니를 꽉 채우도록 설정 */
 .map-wrapper iframe {
   width: 100% !important;
   height: 100% !important;
   display: block !important;
   border: none !important;
+  
+  /* 🎯 전체 화면 확대 방지 핵심: 손가락 터치 제어권을 홈페이지가 아닌 '지도 프레임 내부'로 강제 한정 */
+  pointer-events: auto !important; 
+  touch-action: auto !important;
+}
+.main-wrapper, 
+.mobile-center-box, 
+.flip-clock {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;     /* 🎯 왼쪽으로 치우쳤던 이미지와 시계를 다시 가로 기준 '완벽한 정중앙'으로 정렬 */
+  justify-content: center !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 플립클락 내부 카드 세트들은 가로로 줄을 서야 하므로 방향을 가로 flex로 유지 */
+.flip-clock {
+  flex-direction: row !important; 
 }
 
 }
@@ -320,10 +342,7 @@
     <div class="mobile-center-box">
       <img src="./images/03.jpg" alt="03">
     </div>
-        <!-- 4️⃣ 최하단 세 번째 이미지 구역 -->
-    <div class="mobile-center-box">
-      <img src="./images/03.jpg" alt="03">
-    </div> <!-- ⏰ 세 번째 이미지 바구니 종료 -->
+        
 
     <div class="map-wrapper">
  <div class="map-wrapper">
