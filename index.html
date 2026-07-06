@@ -5,17 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>재환 그리고 한결</title>
   
-  <!-- 구글 눈고딕/본고딕 KR 폰트 로드 -->
-  <link rel="preconnect" href="https://googleapis.com">
-  <link rel="preconnect" href="https://gstatic.com" crossorigin>
-  <link href="https://googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+   <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
 
   <style>
     html, body {
       margin: 0;
       padding: 0;
       background: #f8f4ec;
-      font-family: 'Noto Sans KR', sans-serif;
+      /* 🎯 전체 사이트 글꼴을 공식 SUITE 체로 적용 */
+      font-family: 'SUITE', sans-serif;
       width: 100%;
       min-height: 100%;
     }
@@ -23,24 +21,22 @@
     body {
       display: flex;
       flex-direction: column;
-      align-items: center; /* 💡 바디 전체의 자식 요소를 가로 기준 무조건 정중앙 정렬 */
+      align-items: center; 
       justify-content: flex-start;
       padding: 30px 15px;
       box-sizing: border-box;
     }
 
-    /* 🧱 최외곽 랩퍼: 전체 콘텐츠를 꽉 묶어서 한 번 더 가운데로 밀어주는 방어벽 */
     .main-wrapper {
       width: 100%;
-      max-width: 480px; /* 모바일 가로폭 최적화 규격 */
+      max-width: 480px; 
       display: flex;
       flex-direction: column;
-      align-items: center; /* 💡 내부에 들어오는 모든 요소를 한가운데로 정렬 */
+      align-items: center; 
       justify-content: center;
       margin: 0 auto;
     }
 
-    /* 🖼️ 상단 이미지 정렬 영역 */
     .mobile-center-box {
       width: 100%;
       display: flex;
@@ -54,29 +50,22 @@
       max-width: 100% !important;
       height: auto !important;
       display: block !important;
-      margin: 0 auto 15px auto !important; /* 💡 좌우 마진 auto로 완벽 정중앙 고정 */
+      margin: 0 auto 15px auto !important; 
       border-radius: 8px;
     }
 
-    /* ⏰ 하단 플립 클락 타이머 영역 */
     .flip-clock {
       display: flex !important;
-      justify-content: center !important; /* 💡 타이머 내부 세트들을 정중앙으로 밀집 */
+      justify-content: center !important; 
       align-items: center !important;
       width: 100% !important;
-      margin: 20px auto 40px auto !important; /* 💡 타이머 자체를 가로 한가운데 고정 */
-      font-size: 0.8rem;
-	  opacity: 0.8;
+      margin: 20px auto 40px auto !important; 
+      font-size: 1.6rem;
+      opacity: 0.85;
     }
 
-    /* 화면이 아주 작은 구형 스마트폰 대응 글자 크기 최적화 수식 */
-    @media (max-width: 360px) {
-      .flip-clock { font-size: 1.0rem; }
-    }
-
-    @media (min-width: 768px) {
-      .flip-clock { font-size: 2.2rem; }
-    }
+    @media (max-width: 360px) { .flip-clock { font-size: 1.4rem; } }
+    @media (min-width: 768px) { .flip-clock { font-size: 2.4rem; } }
 
     .flip-clock__piece {
       display: flex;
@@ -93,58 +82,98 @@
       opacity: 0.9;
     }
 
-    /* 플립 시계판 3D 박스 베이스 */
+    :root {
+      --halfHeight: 0.9em; 
+      --borderRadius: 0.15em;
+    }
+
     .flip-card {
       position: relative;
-      width: 1.5em;
-      height: 2.3em;
-      line-height: 1.3em;
-      text-align: center;
-      background: #82835f;
-      color: #f8f4ec;
-      border-radius: 6px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      width: 1.7em;
+      height: calc(var(--halfHeight) * 2);
+      font-size: 1em;
+      perspective: 300px; 
+      font-weight: 700; /* 숫자 두께도 스위트체 굵은 700 두께로 세팅 */
     }
 
     .flip-card__top,
-    .flip-card__bottom {
+    .flip-card__bottom,
+    .flip-card__back-top,
+    .flip-card__back-bottom {
       position: absolute;
       left: 0;
       width: 100%;
       height: 50%;
       overflow: hidden;
+      background: #82835f;
+      color: #f8f4ec;
       box-sizing: border-box;
-      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      backface-visibility: hidden; 
     }
 
-    .flip-card__top {
+    .flip-card__top,
+    .flip-card__back-top {
       top: 0;
+      align-items: flex-start;
       border-top-left-radius: 6px;
       border-top-right-radius: 6px;
-      background: #767756;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
+      background: #767756; 
+      border-bottom: 1px solid rgba(0,0,0,0.15);
+      transform-origin: center bottom;
     }
 
-    .flip-card__bottom {
+    .flip-card__bottom,
+    .flip-card__back-bottom {
       bottom: 0;
+      align-items: flex-end;
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
-      line-height: 0;
+      transform-origin: center top;
     }
 
+    .flip-card__top-inner,
     .flip-card__bottom-inner {
       position: absolute;
       left: 0;
-      bottom: 0;
       width: 100%;
-      height: 200%;
+      height: calc(var(--halfHeight) * 2);
       display: flex;
       justify-content: center;
       align-items: center;
     }
+
+    .flip-card__top-inner { top: 0; }
+    .flip-card__bottom-inner { bottom: 0; }
+
+    .flip-card__back-top {
+      transform: rotateX(180deg);
+      z-index: 2;
+    }
+
+    .flip .flip-card__top {
+      animation: flipTop 0.4s ease-in forwards;
+      z-index: 2;
+    }
+
+    .flip .flip-card__back-top {
+      animation: flipBottom 0.4s 0.4s ease-out forwards;
+    }
+
+    @keyframes flipTop {
+      0% { transform: rotateX(0deg); }
+      100% { transform: rotateX(-90deg); }
+    }
+
+    @keyframes flipBottom {
+      0% { transform: rotateX(90deg); }
+      100% { transform: rotateX(0deg); }
+    }
   </style>
 </head>
 <body>
+
 
   <!-- 🧱 모든 요소를 한 바구니에 담아 정중앙으로 밀어버리는 메인 랩퍼 박스 시작 -->
   <div class="main-wrapper">
