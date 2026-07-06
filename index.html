@@ -91,13 +91,13 @@
   opacity: 0.9;
 }
 
-/* ⚙️ 세로 2.3배 연산 변수 설계 */
+/* ⚙️ 세로 2.3배 연산 변수 고정 */
 :root {
   --cardWidth: 1.7em;
-  --cardHeight: 2.3em; /* 💡 세로 길이를 2.3배 늘린 수치 */
+  --cardHeight: 2.3em;
 }
 
-/* 플립 시계판 3D 박스 베이스 */
+/* 플립 시계판 3D 박스 베이스 및 원근감 주입 */
 .flip-card {
   position: relative;
   width: var(--cardWidth);
@@ -106,10 +106,14 @@
   color: #f8f4ec;
   border-radius: 6px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  perspective: 400px; 
+  transform-style: preserve-3d;
 }
 
 .flip-card__top,
-.flip-card__bottom {
+.flip-card__bottom,
+.flip-card__back-top,
+.flip-card__back-bottom {
   position: absolute;
   left: 0;
   width: 100%;
@@ -117,38 +121,74 @@
   overflow: hidden;
   box-sizing: border-box;
   backface-visibility: hidden;
-}
-
-.flip-card__top {
-  top: 0;
   display: flex;
   justify-content: center;
+}
+
+.flip-card__top,
+.flip-card__back-top {
+  top: 0;
   align-items: flex-start;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   background: #767756;
   border-bottom: 1px solid rgba(0,0,0,0.1);
-  line-height: var(--cardHeight); /* 상단 숫자를 수직 정중앙 정렬 */
+  line-height: var(--cardHeight);
 }
 
-.flip-card__bottom {
+.flip-card__bottom,
+.flip-card__back-bottom {
   bottom: 0;
+  align-items: flex-end;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
-  line-height: 0;
+  background: #82835f;
 }
 
-/* 💡 하단 카드가 사라지던 버그를 고치기 위해 높이를 다시 200%로 복구하고 수식을 보정했습니다 */
-.flip-card__bottom-inner {
+.flip-card__bottom-inner,
+.flip-card__back-bottom-inner {
   position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 200%; /* 💡 하단 숫자가 잘리지 않도록 공간 2배 복구 */
+  height: 200%;
   display: flex;
   justify-content: center;
   align-items: center;
-  line-height: var(--cardHeight); /* 하단 숫자를 수직 정중앙 정렬 */
+  line-height: var(--cardHeight);
+}
+
+/* 🎬 3D 회전축 원점 분할 */
+.flip-card__top {
+  transform-origin: center bottom;
+  z-index: 3;
+}
+
+.flip-card__back-bottom {
+  transform-origin: center top;
+  transform: rotateX(180deg);
+  z-index: 2;
+}
+
+.flip-card__bottom, .flip-card__back-top { z-index: 1; }
+
+/* 🎬 낙하 모션 애니메이션 속성 */
+.flip .flip-card__top {
+  animation: flipTop 0.35s cubic-bezier(.37,.01,.94,.35) forwards;
+}
+
+.flip .flip-card__back-bottom {
+  animation: flipBottom 0.35s 0.35s cubic-bezier(.15,.45,.28,1) forwards;
+}
+
+@keyframes flipTop {
+  0% { transform: rotateX(0deg); }
+  100% { transform: rotateX(-90deg); }
+}
+
+@keyframes flipBottom {
+  0% { transform: rotateX(90deg); }
+  100% { transform: rotateX(0deg); }
 }
 
   </style>
@@ -170,7 +210,9 @@
       <div class="flip-clock__piece" id="days">
         <div class="flip-card">
           <div class="flip-card__top">00</div>
-          <div class="flip-card__bottom"><div class="flip-card__bottom-inner">00</div></div>
+  <div class="flip-card__bottom"><div class="flip-card__bottom-inner">00</div></div>
+  <div class="flip-card__back-top">00</div>
+  <div class="flip-card__back-bottom"><div class="flip-card__back-bottom-inner">00</div></div>
         </div>
         <span class="flip-clock__slot">일</span>
       </div>
@@ -179,7 +221,9 @@
       <div class="flip-clock__piece" id="hours">
         <div class="flip-card">
           <div class="flip-card__top">00</div>
-          <div class="flip-card__bottom"><div class="flip-card__bottom-inner">00</div></div>
+  <div class="flip-card__bottom"><div class="flip-card__bottom-inner">00</div></div>
+  <div class="flip-card__back-top">00</div>
+  <div class="flip-card__back-bottom"><div class="flip-card__back-bottom-inner">00</div></div>
         </div>
         <span class="flip-clock__slot">시</span>
       </div>
@@ -188,7 +232,9 @@
       <div class="flip-clock__piece" id="minutes">
         <div class="flip-card">
           <div class="flip-card__top">00</div>
-          <div class="flip-card__bottom"><div class="flip-card__bottom-inner">00</div></div>
+  <div class="flip-card__bottom"><div class="flip-card__bottom-inner">00</div></div>
+  <div class="flip-card__back-top">00</div>
+  <div class="flip-card__back-bottom"><div class="flip-card__back-bottom-inner">00</div></div>
         </div>
         <span class="flip-clock__slot">분</span>
       </div>
@@ -196,8 +242,10 @@
       <!-- 초 -->
       <div class="flip-clock__piece" id="seconds">
         <div class="flip-card">
-          <div class="flip-card__top">00</div>
-          <div class="flip-card__bottom"><div class="flip-card__bottom-inner">00</div></div>
+         <div class="flip-card__top">00</div>
+  <div class="flip-card__bottom"><div class="flip-card__bottom-inner">00</div></div>
+  <div class="flip-card__back-top">00</div>
+  <div class="flip-card__back-bottom"><div class="flip-card__back-bottom-inner">00</div></div>
         </div>
         <span class="flip-clock__slot">초</span>
       </div>
