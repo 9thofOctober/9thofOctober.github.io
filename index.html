@@ -93,15 +93,15 @@
 }
 
 /* ⚙️ 1. 가로 50%, 세로 45%, 숫자 30% 정밀 축소 변수 수식 */
+/* ⚙️ 1. 숫자 10% 확대, 세로 5% 확대 및 모바일 가독성 보정 변수 */
 :root {
-  /* 기존 가로 11vw의 50%인 5.5vw로 축소 */
   --cardWidth: 5.5vw;     
-  /* 기존 높이 공식(Width * 2.3)의 45% 비율인 1.035배로 전격 축소 */
-  --cardHeight: calc(var(--cardWidth) * 1.035); 
+  /* 💡 카드의 세로 길이를 기존(1.035) 대비 5% 키운 1.086배율로 정밀 확장 */
+  --cardHeight: calc(var(--cardWidth) * 1.086); 
   --halfHeight: calc(var(--cardHeight) / 2);
 }
 
-/* 태블릿 및 PC 화면(가로 768px 이상) 최대 고정 크기 제한도 정확히 50% 축소 (55px -> 27.5px) */
+/* 태블릿 및 PC 화면 최대 고정 크기 제한 */
 @media (min-width: 768px) {
   :root {
     --cardWidth: 27.5px; 
@@ -115,19 +115,20 @@
   height: var(--cardHeight);
   background: #82835f;
   color: #f8f4ec;
-  border-radius: 4px; /* 박스가 작아졌으므로 둥근 모서리 반지름도 조화롭게 축소 */
+  border-radius: 4px; 
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   perspective: 200px; 
   transform-style: preserve-3d;
-  /* 💡 내부 글자 크기를 기존 크기 대비 정확히 30% 수준으로 축소 조율 */
-  font-size: 0.525rem; 
+  
+  /* 💡 모바일에서 글자가 증발하는 버그를 막기 위해 절대 단위(rem) 대신 
+     카드 박스 높이에 100% 동기화되는 유연한 em/calc 단위로 전격 교체하고, 
+     기존 크기 대비 정확히 10% 늘어난 비율로 숫자를 키웠습니다. */
+  font-size: calc(var(--cardHeight) * 0.58); 
+  font-weight: 700;
+  text-align: center;
 }
 
-@media (min-width: 1000px) {
-  .flip-card { font-size: 0.735rem; } /* PC 해상도 글자 크기도 30% 비율 유지 */
-}
-
-/* 3D 레이어 은폐 구조 및 Flex 정렬 */
+/* 3D 레이어 은폐 구조 및 Flex 정렬 (수직 중앙 정렬 강화) */
 .flip-card__top,
 .flip-card__bottom,
 .flip-card__back-top,
@@ -151,7 +152,8 @@
   border-top-right-radius: 4px;
   background: #767756;
   border-bottom: 1px solid rgba(0,0,0,0.1);
-  line-height: var(--cardHeight);
+  /* 💡 모바일 줄높이 버그 차단: 글자 위치를 수직 중앙으로 강제 바인딩 */
+  line-height: var(--cardHeight); 
 }
 
 .flip-card__bottom,
@@ -169,11 +171,12 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 200%;
+  height: 200%; 
   display: flex;
   justify-content: center;
   align-items: center;
-  line-height: var(--cardHeight);
+  /* 💡 모바일 줄높이 버그 차단: 글자 위치를 수직 중앙으로 강제 바인딩 */
+  line-height: var(--cardHeight); 
 }
 
 /* 3D 회전축 및 계층 레이어 정렬 */
@@ -191,7 +194,7 @@
 .flip-card__bottom { z-index: 1; }
 .flip-card__back-top { z-index: 2; }
 
-/* 🎬 가볍고 경쾌해진 낙하 모션 애니메이션 타임 속성 */
+/* 🎬 낙하 모션 애니메이션 타임 속성 */
 .flip .flip-card__top {
   animation: flipTop 0.3s cubic-bezier(.4, 0, 1, 1) forwards;
 }
