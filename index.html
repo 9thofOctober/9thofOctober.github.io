@@ -257,18 +257,32 @@
     // 🎯 한국 시간(KST) 기준 2026년 10월 9일 오후 3시 정각 타깃 카운트다운 고정
     const targetDate = new Date("2026-10-09T15:00:00+09:00").getTime();
 
-    function updateCard(cardId, newValue) {
-      const piece = document.getElementById(cardId);
-      if (!piece) return;
-      
-      const topElement = piece.querySelector('.flip-card__top');
-      const bottomInner = piece.querySelector('.flip-card__bottom-inner');
-      
-      if (topElement.textContent !== newValue) {
-        topElement.textContent = newValue;
-        bottomInner.textContent = newValue;
-      }
-    }
+function updateCard(cardId, newValue) {
+  const piece = document.getElementById(cardId);
+  if (!piece) return;
+  
+  const top = piece.querySelector('.flip-card__top');
+  const bottomInner = piece.querySelector('.flip-card__bottom-inner');
+  const backTop = piece.querySelector('.flip-card__back-top');
+  const backBottomInner = piece.querySelector('.flip-card__back-bottom-inner');
+  
+  const currentValue = top.textContent;
+  
+  if (currentValue !== newValue) {
+    backTop.textContent = newValue;
+    bottomInner.textContent = newValue;
+    
+    piece.classList.remove('flip');
+    void piece.offsetWidth; 
+    piece.classList.add('flip');
+    
+    setTimeout(function() {
+      top.textContent = newValue;
+      backBottomInner.textContent = newValue;
+    }, 350);
+  }
+}
+
 
     function format(num) {
       var str = String(num);
