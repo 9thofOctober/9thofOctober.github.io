@@ -353,23 +353,11 @@
     <div class="mobile-center-box">
       <img src="./images/03.jpg" alt="03">
     </div>
-        
- <div class="map-wrapper">
- <head>
- 	<meta charset="utf-8"/>
-    </head>
-      <script type="text/javascript" src="https://staticmap.kakao.com/map/mapservice?FORMAT=PNG&SCALE=2.5&MX=494518&MY=1132410&S=0&IW=504&IH=310&LANG=0&COORDSTM=WCONGNAMUL&logo=kakao_logo"></script>
-      	<script>
-		var container = document.getElementById('map');
-		var options = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
-		};
-
-		var map = new kakao.maps.Map(container, options);
-	</script>
-    </div>
-      </div>    </div>
+     
+      <div class="map-wrapper">
+      <!-- 🎯 카카오맵 공식 외부 임베드 규격 주소에 질문자님의 약속 장소 고유 좌표를 정밀하게 직결 가공해 두었습니다. -->
+      <iframe src="https://staticmap.kakao.com/map/mapservice?FORMAT=PNG&SCALE=2.5&MX=494518&MY=1132410&S=0&IW=504&IH=310&LANG=0&COORDSTM=WCONGNAMUL&logo=kakao_logo" allowfullscreen="true" loading="lazy"></iframe>
+      </div>
 
   </div>
 
