@@ -94,14 +94,14 @@
 
 /* ⚙️ 1. 가로 50%, 세로 45%, 숫자 30% 정밀 축소 변수 수식 */
 /* ⚙️ 1. 숫자 10% 확대, 세로 5% 확대 및 모바일 가독성 보정 변수 */
+/* ⚙️ 모바일 강제 버그 해결 및 요청 비율 정밀 조정 변수 */
 :root {
   --cardWidth: 5.5vw;     
-  /* 💡 카드의 세로 길이를 기존(1.035) 대비 5% 키운 1.086배율로 정밀 확장 */
-  --cardHeight: calc(var(--cardWidth) * 1.086); 
+  /* 💡 세로 박스 길이를 기존 대비 5% 추가 확장한 최종 스케일 비율 */
+  --cardHeight: calc(var(--cardWidth) * 1.14); 
   --halfHeight: calc(var(--cardHeight) / 2);
 }
 
-/* 태블릿 및 PC 화면 최대 고정 크기 제한 */
 @media (min-width: 768px) {
   :root {
     --cardWidth: 27.5px; 
@@ -118,17 +118,17 @@
   border-radius: 4px; 
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   perspective: 200px; 
+  /* 💡 모바일 브라우저의 3D 렌더링 엔진을 깨우는 필수 속성 */
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   
-  /* 💡 모바일에서 글자가 증발하는 버그를 막기 위해 절대 단위(rem) 대신 
-     카드 박스 높이에 100% 동기화되는 유연한 em/calc 단위로 전격 교체하고, 
-     기존 크기 대비 정확히 10% 늘어난 비율로 숫자를 키웠습니다. */
-  font-size: calc(var(--cardHeight) * 0.58); 
+  /* 💡 숫자 크기를 기존 대비 10% 추가 확대 완료 */
+  font-size: calc(var(--cardHeight) * 0.64); 
   font-weight: 700;
   text-align: center;
 }
 
-/* 3D 레이어 은폐 구조 및 Flex 정렬 (수직 중앙 정렬 강화) */
+/* 💡 모바일 숫자 증발 및 선노출 오류 해결의 핵심: Z축 입체 깊이(translateZ) 부여 */
 .flip-card__top,
 .flip-card__bottom,
 .flip-card__back-top,
@@ -140,6 +140,7 @@
   overflow: hidden;
   box-sizing: border-box;
   backface-visibility: hidden; 
+  -webkit-backface-visibility: hidden; /* 아이폰 사파리 가림막 필수 대응 */
   display: flex;
   justify-content: center;
 }
@@ -152,7 +153,6 @@
   border-top-right-radius: 4px;
   background: #767756;
   border-bottom: 1px solid rgba(0,0,0,0.1);
-  /* 💡 모바일 줄높이 버그 차단: 글자 위치를 수직 중앙으로 강제 바인딩 */
   line-height: var(--cardHeight); 
 }
 
@@ -175,26 +175,34 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* 💡 모바일 줄높이 버그 차단: 글자 위치를 수직 중앙으로 강제 바인딩 */
   line-height: var(--cardHeight); 
 }
 
-/* 3D 회전축 및 계층 레이어 정렬 */
+/* 🎬 [핵심 수정] 모바일 3D 공간 상에서 카드 레이어의 순서(translateZ)를 강제로 고정 */
 .flip-card__top {
   transform-origin: center bottom;
+  transform: translateZ(3px); /* 현재 정면 상단 숫자를 가장 앞으로 밀어냄 */
   z-index: 4;
 }
 
 .flip-card__back-bottom {
   transform-origin: center top;
-  transform: rotateX(180deg);
+  /* 대기 중일 때 미리 뒤집어두되, z축을 상단 카드 바로 뒤에 배치 */
+  transform: rotateX(180deg) translateZ(2px); 
   z-index: 3;
 }
 
-.flip-card__bottom { z-index: 1; }
-.flip-card__back-top { z-index: 2; }
+.flip-card__back-top { 
+  transform: translateZ(1px);
+  z-index: 2; 
+}
 
-/* 🎬 낙하 모션 애니메이션 타임 속성 */
+.flip-card__bottom { 
+  transform: translateZ(0px);
+  z-index: 1; 
+}
+
+/* 🎬 낙하 모션 애니메이션 타임 설정 */
 .flip .flip-card__top {
   animation: flipTop 0.3s cubic-bezier(.4, 0, 1, 1) forwards;
 }
@@ -204,15 +212,25 @@
 }
 
 @keyframes flipTop {
-  0% { transform: rotateX(0deg); }
-  100% { transform: rotateX(-90deg); }
+  0% { transform: rotateX(0deg) translateZ(3px); }
+  100% { transform: rotateX(-90deg) translateZ(3px); }
 }
 
 @keyframes flipBottom {
-  0% { transform: rotateX(90deg); opacity: 0; }
-  49% { opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: rotateX(0deg); opacity: 1; }
+  0% { 
+    transform: rotateX(90deg) translateZ(2px); 
+    opacity: 0; 
+  }
+  49% {
+    opacity: 0; 
+  }
+  50% { 
+    opacity: 1; 
+  }
+  100% { 
+    transform: rotateX(0deg) translateZ(2px); 
+    opacity: 1; 
+  }
 }
 
   </style>
