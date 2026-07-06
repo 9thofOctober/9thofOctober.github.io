@@ -239,13 +239,12 @@
     transform: rotateX(0deg) translateZ(2px); 
     opacity: 1; 
   }
-/* 🌐 카카오맵 바구니: 모바일·웹 화면 80% 크기 고정 및 완벽 정중앙 배치 */
+
 .map-wrapper {
   width: 80% !important;
   max-width: 80% !important;
   height: 250px !important; /* 작아진 카드 배율에 맞춰 세로 높이 최적화 */
   
-  /* 🎯 왼쪽 쏠림 버그 해결 핵심: 자석 성질을 완전히 제거하고 수평 기준 강제 정중앙 배치 */
   display: block !important;
   clear: both !important;
   float: none !important;
@@ -356,8 +355,19 @@
     </div>
         
  <div class="map-wrapper">
-      <!-- 🎯 외부 불법 링크 필터를 우회하는 카카오맵 정식 공유 서비스 지도 창입니다. -->
-      <iframe src="https://kakao.com" allowfullscreen="true" loading="lazy"></iframe>
+ <head>
+ 	<meta charset="utf-8"/>
+    </head>
+      <script type="text/javascript" src=https://map.kakao.com/?urlX=494519&urlY=1132411&urlLevel=3&map_type=TYPE_MAP&map_hybrid=false"></script>
+      	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+	</script>
     </div>
       </div>    </div>
 
