@@ -240,45 +240,33 @@
     opacity: 1; 
   }
 
-.map-wrapper {
-  width: 80% !important;
+/* ❌ 기존 const Map 구역을 지우고 이 코드로 교체 */
+const Map = styled.div`
+  width: 80% !important;        /* 💡 요청 사양: 가로 크기 80%로 축소 */
   max-width: 80% !important;
-  height: 250px !important; /* 작아진 카드 배율에 맞춰 세로 높이 최적화 */
-  
-  display: block !important;
-  clear: both !important;
-  float: none !important;
-  margin: 30px auto 50px auto !important; 
-  
-  border-radius: 8px;
+  margin: 0 auto !important;    /* 축소된 지도를 화면 정중앙에 정렬 */
+  border-radius: 8px;           /* 모서리 라운딩 */
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-}
 
-/* 📱 모바일 지도 내부 터치 및 독립 줌 제어 수식 */
-.map-wrapper iframe {
-  width: 100% !important;
-  height: 100% !important;
-  display: block !important;
-  border: none !important;
-  
-  /* 🎯 전체 화면 확대 방지 핵심: 손가락 터치 제어권을 홈페이지가 아닌 '지도 프레임 내부'로 강제 한정 */
-  pointer-events: auto !important; 
-  touch-action: auto !important;
-}
+  /* 🎯 버그 해결 1: 하단의 "카카오맵/지도 크게보기" 회색 바를 강제 숨김 차단 */
+  .wrap_btn_roughmap {
+    display: none !important;
+  }
 
-/* 🧱 쏠림 방어벽: 최외곽 기둥과 내부 요소들의 중앙 정렬 정밀 리밸런싱 */
-.main-wrapper, 
-.mobile-center-box {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;     /* 🎯 왼쪽으로 치우쳤던 이미지들을 다시 가로 기준 '완벽한 정중앙'으로 정렬 */
-  justify-content: center !important;
-  text-align: center !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  width: 100% !important;
+  /* 🎯 버그 해결 2: 전체 화면 확대를 차단하고 '지도 프레임 내부'만 축소/확대 고정 */
+  .root_daum_roughmap, 
+  .root_daum_roughmap .roughmap_leander,
+  .root_daum_roughmap iframe {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 250px !important;   /* 축소된 가로 비율에 맞춰 세로 높이 최적화 */
+    border: none !important;
+    pointer-events: auto !important;
+    touch-action: auto !important;
+  }
+`;
+
 }
 
 /* 플립클락 정중앙 정렬 방어벽 */
@@ -354,10 +342,7 @@
       <img src="./images/03.jpg" alt="03">
     </div>
      
-      <div class="map-wrapper">
-      <!-- 🎯 카카오맵 공식 외부 임베드 규격 주소에 질문자님의 약속 장소 고유 좌표를 정밀하게 직결 가공해 두었습니다. -->
-      <iframe src="https://staticmap.kakao.com/map/mapservice?FORMAT=PNG&SCALE=2.5&MX=494518&MY=1132410&S=0&IW=504&IH=310&LANG=0&COORDSTM=WCONGNAMUL&logo=kakao_logo" allowfullscreen="true" loading="lazy"></iframe>
-      </div>
+    <div id="daumRoughmapContainer1783381452325" class="root_daum_roughmap root_daum_roughmap_landing"></div>
 
   </div>
 
