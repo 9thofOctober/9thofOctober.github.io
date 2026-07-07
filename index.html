@@ -256,7 +256,7 @@
 
 
 .map-wrapper {
-    padding-top: 18px;      /* 42 → 24 */
+    padding-top: 218px;      /* 42 → 24 */
     width: 70%;
     margin: 0 auto 4px;     /* 아래 여백도 거의 제거 */
 }
@@ -290,9 +290,8 @@
     display:flex;
     justify-content:center;
     align-items:center;
-    width:100%;
-    gap:10px;
-    margin:2px auto 18px;
+    gap:14px;              /* 아이콘 사이 간격 */
+    margin:8px 0 20px;     /* ↑ 지도와 간격 크게 축소 */
 }
 
 .map-link{
@@ -343,6 +342,7 @@
 
 
 }
+</style>
 
   </style>
 </head>
@@ -398,15 +398,25 @@
     </div>
       
     <div class="mobile-center-box">
-    
       <img src="./images/03.jpg" alt="03">
-           
-<div class="map-wrapper">
-    <div id="daumRoughmapContainer1783381452325"
-         class="kakao-map-container root_daum_roughmap root_daum_roughmap_landing">
     </div>
+     
+<div class="map-wrapper">
+  <div id="daumRoughmapContainer1783381452325" class="kakao-map-container root_daum_roughmap root_daum_roughmap_landing"></div>
+</div>
 
- <div class="map-links">
+<div style="text-align:center; margin:10px 0 50px;">
+
+    <div style="
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:29px;
+    margin:10px 0 50px;
+    flex-wrap:nowrap;
+">
+
+  <div class="map-links">
 
     <a class="map-link"
        href="https://kko.to/-lsyljPSdu"
@@ -436,6 +446,8 @@
     </a>
 
 </div>
+
+
 </div>
 
 <script charset="UTF-8"
