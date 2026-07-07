@@ -284,71 +284,56 @@
     pointer-events: auto !important;
     touch-action: auto !important;
   }
-  .map-links {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 28px;
-    margin: 40px 0 50px;
+  /* ==========================
+   iPhone 스타일 지도 아이콘
+   ========================== */
+
+.map-links{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:18px;
+    margin:16px 0 28px;
 }
 
-.map-link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
+.map-link{
+    text-decoration:none;
 }
 
-.map-icon {
-    width: 64px;
-    height: 64px;
+.map-icon{
+    width:46px;
+    height:46px;
+    border-radius:13px;
+    overflow:hidden;
 
-    /* iPhone 앱 느낌 */
-    border-radius: 18px;
-    overflow: hidden;
-
-    background: #ffffff;
+    background:#fff;
 
     box-shadow:
-        0 4px 10px rgba(0,0,0,.12),
-        0 1px 3px rgba(0,0,0,.08);
+        0 2px 6px rgba(0,0,0,.10),
+        0 1px 2px rgba(0,0,0,.06);
 
-    transition: transform .18s ease,
-                box-shadow .18s ease;
+    transition:.18s;
 }
 
 .map-icon:hover{
-    transform: translateY(-2px);
-    box-shadow:
-        0 8px 18px rgba(0,0,0,.18),
-        0 3px 8px rgba(0,0,0,.10);
+    transform:translateY(-2px);
 }
 
 .map-icon:active{
-    transform: scale(.95);
-}
-
-.map-name{
-    margin-top:10px;
-    font-size:13px;
-    color:#666;
-    font-weight:500;
+    transform:scale(.94);
 }
 
 @media (max-width:480px){
 
     .map-links{
-        gap:20px;
+        gap:16px;
+        margin:14px 0 24px;
     }
 
     .map-icon{
-        width:58px;
-        height:58px;
-        border-radius:16px;
-    }
-
-    .map-name{
-        font-size:12px;
+        width:42px;
+        height:42px;
+        border-radius:12px;
     }
 
 }
@@ -426,51 +411,37 @@
     flex-wrap:nowrap;
 ">
 
-   <div class="map-links">
+  <div class="map-links">
 
-    <!-- 카카오 -->
     <a class="map-link"
        href="https://kko.to/-lsyljPSdu"
        target="_blank"
        rel="noopener">
-
         <img class="map-icon"
-             src="./images/kakaomap_basic.png"
+             src="./images/kakao-map.png"
              alt="카카오 길찾기">
-
-        <span class="map-name">카카오</span>
-
     </a>
 
-    <!-- 네이버 -->
     <a class="map-link"
        href="https://naver.me/x1uCSmPA"
        target="_blank"
        rel="noopener">
-
         <img class="map-icon"
              src="./images/naver-map.png"
              alt="네이버 길찾기">
-
-        <span class="map-name">네이버</span>
-
     </a>
 
-    <!-- 구글 -->
     <a class="map-link"
        href="https://www.google.com/maps/search/?api=1&query=37.5771896,126.9752048"
        target="_blank"
        rel="noopener">
-
         <img class="map-icon"
-             src="./images/Google-Maps.jpeg"
+             src="./images/google-map.png"
              alt="구글 길찾기">
-
-        <span class="map-name">구글</span>
-
     </a>
 
 </div>
+
 
 </div>
 
