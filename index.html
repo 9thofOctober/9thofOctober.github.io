@@ -256,7 +256,6 @@
 
 
 }
-<style>
   .map-wrapper {
     padding-top: 42px;
     width: 70%;
@@ -348,9 +347,10 @@
   <div id="daumRoughmapContainer1783381452325" class="kakao-map-container root_daum_roughmap root_daum_roughmap_landing"></div>
 </div>
 
-<!-- 3. 스크립트 로드 및 생성부 (Body 최하단 추천) -->
-<!-- 프로토콜을 https로 명시하고, 파일이 다운로드된 후 지도를 그리도록 구조 변경 -->
-<script charset="UTF-8" src="https://daumcdn.net"></script>
+<script charset="UTF-8"
+        class="daum_roughmap_loader_script"
+        src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js">
+</script>
 
 <script charset="UTF-8">
   // 외부 스크립트 파일이 메모리에 완벽히 올라갔는지 체크 후 실행
