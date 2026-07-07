@@ -240,6 +240,22 @@
     opacity: 1; 
   }
 
+}
+
+/* 플립클락 정중앙 정렬 방어벽 */
+.flip-clock {
+  display: flex !important;
+  flex-direction: row !important;     /* 시계판은 가로로 나열 유지 */
+  justify-content: center !important; /* 🎯 시계판 자체도 가로축 기준 완벽 정중앙 고정 */
+  align-items: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  clear: both !important;
+}
+
+
+
+}
 <style>
   .map-wrapper {
     padding-top: 42px;
@@ -270,24 +286,6 @@
     touch-action: auto !important;
   }
 </style>
-
-}
-
-/* 플립클락 정중앙 정렬 방어벽 */
-.flip-clock {
-  display: flex !important;
-  flex-direction: row !important;     /* 시계판은 가로로 나열 유지 */
-  justify-content: center !important; /* 🎯 시계판 자체도 가로축 기준 완벽 정중앙 고정 */
-  align-items: center !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  clear: both !important;
-}
-
-
-
-}
-
 
   </style>
 </head>
