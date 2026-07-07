@@ -342,7 +342,60 @@ const Map = styled.div`
       <img src="./images/03.jpg" alt="03">
     </div>
      
-    <div id="daumRoughmapContainer1783381452325" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+<!-- 카카오 지도 스타일 정의 (Head 태그 안이나 Body 상단에 배치) -->
+<style>
+  .map-wrapper {
+    padding-top: 42px;
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  /* 지도의 가로폭을 80% 배율로 축소하고 정중앙 정렬 */
+  .kakao-map-container {
+    width: 80% !important;
+    max-width: 80% !important;
+    margin: 0 auto !important;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    clear: both !important;
+    float: none !important;
+  }
+
+  /* 하단의 "카카오맵/지도 크게보기" 회색 버튼 바 강제 차단 */
+  .kakao-map-container .wrap_btn_roughmap {
+    display: none !important;
+  }
+
+  /* 전체 화면 확대를 차단하고 '지도 내부 프레임'만 축소/확대되도록 한정 */
+  .kakao-map-container.root_daum_roughmap, 
+  .kakao-map-container.root_daum_roughmap .roughmap_leander,
+  .kakao-map-container.root_daum_roughmap iframe {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 250px !important; /* 세로 높이 최적화 */
+    border: none !important;
+    pointer-events: auto !important;
+    touch-action: auto !important;
+  }
+</style>
+
+<!-- 지도 표시할 HTML 레이아웃 -->
+<div class="map-wrapper">
+  <div id="daumRoughmapContainer1783381452325" class="kakao-map-container root_daum_roughmap root_daum_roughmap_landing"></div>
+</div>
+
+<!-- 카카오 지도 실행 스크립트 -->
+<script charset="UTF-8" src="https://daumcdn.net"></script>
+
+<script charset="UTF-8">
+  new daum.roughmap.Lander({
+    "timestamp" : "1783381452325",
+    "key" : "qs8z8765kw6",
+    "mapWidth" : "100%",
+    "mapHeight" : "250"
+  }).render();
+</script>
 
   </div>
 
