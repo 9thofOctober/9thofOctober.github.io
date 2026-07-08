@@ -72,6 +72,12 @@
       margin: 0 auto 15px auto !important; /* 💡 좌우 마진 auto로 완벽 정중앙 고정 */
       border-radius: 8px;
     }
+	
+	.mobile-center-box img.transport-image {
+    width: 85% !important;
+    max-width: 320px !important;
+    margin-bottom: 150px !important;
+}
 
     .flip-clock {
       display: flex !important;
@@ -357,10 +363,6 @@
         border-radius:11px;
     }
 
-.mobile-center-box img.subway-image {
-    width: 80% !important;
-    max-width: 500px !important;
-}
 
 html{
     scroll-behavior:smooth;
@@ -540,11 +542,12 @@ pauseBtn.onclick = function() {
   </div>
 
 <div class="mobile-center-box">
-    <img src="./images/weddingcarimage.jpg" alt="weddingcarimage">
-
+    <img src="./images/weddingcarimage.jpg" alt="weddingcarimage" class="transport-image">
+</div>
+<div class="mobile-center-box">
     <img src="./images/지하철차량.jpg"
-         alt="지하철차량" style="margin-bottom: 150px !important;
-         class="subway-image">
+         alt="지하철차량"
+         class="transport-image">
 </div>
 
 <script charset="UTF-8"
