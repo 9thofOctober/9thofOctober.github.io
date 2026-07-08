@@ -345,23 +345,30 @@
     max-width: 500px !important;
 }
 
-html{
-    scroll-behavior:smooth;
+/* 1. html 태그에 전체 스크롤 스냅을 강제로 부여합니다 */
+html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory !important;
+    height: 100%;
 }
 
-body{
-    scroll-snap-type:y proximity;
+/* 2. 기존 body의 flex 때문에 스냅이 깨지는 것을 방지하기 위해 정렬을 해제합니다 */
+body {
+    scroll-snap-type: y mandatory !important;
+    display: block !important; /* flex를 풀고 블록 구조로 변경 */
+    padding: 0 !important;
 }
 
-.snap-section{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    scroll-snap-align:center;
-}
-
+/* 3. 스냅이 걸릴 자식 섹션 설정 */
+.snap-section {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start !important; /* 화면 시작 지점에 딱 맞춤 */
+    box-sizing: border-box;
 }
 </style>
 
