@@ -345,6 +345,23 @@
     max-width: 500px !important;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    scroll-snap-type:y proximity;
+}
+
+.snap-section{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    scroll-snap-align:center;
+}
+
 }
 </style>
 
@@ -354,8 +371,13 @@
 
   <div class="main-wrapper">
 
-    <div class="mobile-center-box">
-      <img src="./images/01.jpg" alt="01" height="1234" style="margin-bottom: 150px !important;">
+<div class="mobile-center-box snap-section">
+      <img src="./images/01.jpg" alt="01" style="margin-bottom: 150px !important;">
+      </div>
+<div class="mobile-center-box snap-section">
+      <img src="./images/02.jpg" alt="02" style="margin-bottom: 150px !important;">
+      </div>
+            <div class="mobile-center-box">
       <img src="./images/달력.jpg" alt="달력">
     </div>
 
