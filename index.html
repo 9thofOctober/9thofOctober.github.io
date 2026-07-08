@@ -345,30 +345,23 @@
     max-width: 500px !important;
 }
 
-/* 1. html 태그에 전체 스크롤 스냅을 강제로 부여합니다 */
-html {
-    scroll-behavior: smooth;
-    scroll-snap-type: y mandatory !important;
-    height: 100%;
+html{
+    scroll-behavior:smooth;
 }
 
-/* 2. 기존 body의 flex 때문에 스냅이 깨지는 것을 방지하기 위해 정렬을 해제합니다 */
-body {
-    scroll-snap-type: y mandatory !important;
-    display: block !important; /* flex를 풀고 블록 구조로 변경 */
-    padding: 0 !important;
+body{
+    scroll-snap-type:y proximity;
 }
 
-/* 3. 스냅이 걸릴 자식 섹션 설정 */
-.snap-section {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    scroll-snap-align: start !important; /* 화면 시작 지점에 딱 맞춤 */
-    box-sizing: border-box;
+.snap-section{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    scroll-snap-align:center;
+}
+
 }
 </style>
 
@@ -376,10 +369,12 @@ body {
 </head>
 <body>
 
-<div class="mobile-center-box snap-section">
+  <div class="main-wrapper">
+
+    <div class="mobile-center-box">
       <img src="./images/01.jpg" alt="01" style="margin-bottom: 150px !important;">
       </div>
-<div class="mobile-center-box snap-section">
+      <div class="mobile-center-box">
       <img src="./images/02.jpg" alt="02" style="margin-bottom: 150px !important;">
       </div>
             <div class="mobile-center-box">
