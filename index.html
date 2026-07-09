@@ -79,6 +79,12 @@
     margin-bottom: 0 auto !important;
 }
 
+	.mobile-center-box img.transport-image02 {
+    width: 88% !important;
+    max-width: 480px !important;
+    margin-bottom: 300px !important;
+}
+
     .flip-clock {
       display: flex !important;
       justify-content: center !important; /* 💡 타이머 내부 세트들을 정중앙으로 밀집 */
@@ -110,7 +116,7 @@
 
   .flip-clock__slot {
   font-size: 0.6rem;
-  color: #9a9a7b;
+  color:;
   margin-top: 12px;
   font-weight: 200;
   opacity: 0.65;
@@ -381,6 +387,163 @@ body{
     scroll-snap-align:center;
 }
 
+.account-section{
+    padding:70px 24px;
+    font-family:'SUITE',sans-serif;
+}
+
+.account-title{
+    text-align:center;
+    margin-bottom:38px;
+}
+
+.account-title img{
+    width:180px;
+    max-width:80%;
+    display:block;
+    margin:0 auto;
+}
+
+.account-wrap{
+    display:flex;
+    gap:16px;
+}
+
+.account-side{
+    flex:1;
+}
+
+.account-btn{
+
+    width:100%;
+    height:48px;
+
+    border:1px solid #9a9a7b;
+    border-radius:30px;
+
+    background:#fff;
+
+    color:#9a9a7b;
+
+    font-family:'SUITE',sans-serif;
+    font-size:17px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.account-btn:hover{
+    background:#f8f4ec;
+}
+
+.account-list{
+
+    max-height:0;
+    overflow:hidden;
+
+    transition:max-height .35s ease;
+
+}
+
+.account-list.open{
+
+    max-height:500px;
+    margin-top:18px;
+
+}
+
+.account-item{
+
+    margin-bottom:20px;
+
+}
+
+.account-name{
+
+    color:#9a9a7b;
+    font-size:15px;
+    font-weight:600;
+
+    margin-bottom:8px;
+
+}
+
+.account-number{
+
+    display:inline-flex;
+    align-items:center;
+
+    gap:6px;
+
+    color:#9a9a7b;
+
+    font-size:14px;
+
+    line-height:1.5;
+
+}
+
+.copy-icon{
+
+    width:14px;
+    height:14px;
+
+    cursor:pointer;
+
+    opacity:.75;
+
+    transition:.2s;
+
+}
+
+.copy-icon:hover{
+
+    opacity:1;
+    transform:scale(1.12);
+
+}
+
+.copy-toast{
+
+    position:fixed;
+
+    left:50%;
+    bottom:40px;
+
+    transform:translateX(-50%) translateY(20px);
+
+    background:#f8f4ec;
+
+    border:1px solid #9a9a7b;
+
+    color:#9a9a7b;
+
+    font-family:'SUITE',sans-serif;
+    font-size:14px;
+
+    padding:10px 18px;
+
+    border-radius:24px;
+
+    opacity:0;
+
+    transition:.3s;
+
+    z-index:9999;
+
+    pointer-events:none;
+
+}
+
+.copy-toast.show{
+
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+
+}
+
 }
 </style>
 
@@ -437,6 +600,45 @@ pauseBtn.onclick = function() {
   playBtn.style.display = "block";
 };
 </script>
+
+function toggleAccount(id){
+
+    const groom=document.getElementById("groomAccount");
+    const bride=document.getElementById("brideAccount");
+
+    if(id==="groomAccount"){
+
+        bride.classList.remove("open");
+        groom.classList.toggle("open");
+
+    }else{
+
+        groom.classList.remove("open");
+        bride.classList.toggle("open");
+
+    }
+
+}
+
+function copyAccount(id){
+
+    const text=document.getElementById(id).innerText;
+
+    navigator.clipboard.writeText(text).then(function(){
+
+        const toast=document.getElementById("copyToast");
+
+        toast.classList.add("show");
+
+        setTimeout(function(){
+
+            toast.classList.remove("show");
+
+        },1500);
+
+    });
+
+}
 
 <body>
 
@@ -547,8 +749,124 @@ pauseBtn.onclick = function() {
 <div class="mobile-center-box">
     <img src="./images/지하철차량.jpg"
          alt="지하철차량"
-         class="transport-image">
+         class="transport-image02 style="margin-bottom:600px !important;">
 </div>
+
+<div class="mobile-center-box">
+    <img src="./images/RSVP.jpg" alt="02" style="margin-bottom:260px !important;">
+  </div>
+  
+  <section class="account-section">
+
+    <div class="account-title">
+        <img src="./images/Registry.png" alt="Registry">
+    </div>
+
+    <div class="account-wrap">
+
+        <!-- 신랑측 -->
+        <div class="account-side">
+
+            <button class="account-btn"
+                onclick="toggleAccount('groomAccount')">
+                신랑측
+            </button>
+
+            <div class="account-list" id="groomAccount">
+
+                <div class="account-item">
+                  <div class="account-name">신랑 이재환</div>
+
+                    <div class="account-number">
+                        <span id="groom1">기업은행 334 095093 01 010</span>
+
+                        <img src="./images/copy.png"
+                             class="copy-icon"
+                             alt="복사"
+                             onclick="copyAccount('groom1')">
+                    </div>
+                </div>
+
+
+              </div>
+
+                <div class="account-item">
+                    <div class="account-name">모 윤희경</div>
+
+                    <div class="account-number">
+                        <span id="groom3">농협 211077 52 003755</span>
+
+                        <img src="./images/copy.png"
+                             class="copy-icon"
+                             alt="복사"
+                             onclick="copyAccount('groom3')">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 신부측 -->
+        <div class="account-side">
+
+            <button class="account-btn"
+                onclick="toggleAccount('brideAccount')">
+                신부측
+            </button>
+
+            <div class="account-list" id="brideAccount">
+
+                <div class="account-item">
+                    <div class="account-name">신부 김한결</div>
+
+                    <div class="account-number">
+                        <span id="bride1">하나은행 620 200382 454</span>
+
+                        <img src="./images/copy.png"
+                             class="copy-icon"
+                             alt="복사"
+                             onclick="copyAccount('bride1')">
+                    </div>
+                </div>
+
+                <div class="account-item">
+                    <div class="account-name">부 김종덕</div>
+
+                    <div class="account-number">
+                        <span id="bride2">농협 959 01 031624</span>
+
+                        <img src="./images/copy.png"
+                             class="copy-icon"
+                             alt="복사"
+                             onclick="copyAccount('bride2')">
+                    </div>
+                </div>
+
+                <div class="account-item">
+                    <div class="account-name">모 양시연</div>
+
+                    <div class="account-number">
+                        <span id="bride3">농협 1095 12 010476</span>
+
+                        <img src="./images/copy.png"
+                             class="copy-icon"
+                             alt="복사"
+                             onclick="copyAccount('bride3')">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="copyToast" class="copy-toast">
+        계좌번호가 복사되었습니다.
+    </div>
+
+</section>
 
 <script charset="UTF-8"
         class="daum_roughmap_loader_script"
@@ -574,7 +892,7 @@ pauseBtn.onclick = function() {
   // HTML 문서 전체가 로드 완료되면 지도 렌더링 시작
   window.addEventListener('DOMContentLoaded', renderKakaoMap);
 </script>
-  </div>
+</div>
 
   <script>
     // 🎯 한국 시간(KST) 기준 2026년 10월 9일 오후 3시 정각 타깃 카운트다운 고정
