@@ -471,15 +471,16 @@ body {
 
 .simple-account-row {
   display: grid;
-  grid-template-columns: auto 32px;
+  grid-template-columns: minmax(0, auto) 32px;
   align-items: center;
   justify-content: center;
 }
 
 .account-group {
   display: grid;
-  grid-template-columns: 38px 45px 38px 30px 75px 1fr;
+  grid-template-columns: 38px 43px 36px 26px 70px auto;
   align-items: center;
+  white-space: nowrap;
 }
 
 .first,
