@@ -472,8 +472,11 @@ body {
 }
 
 .simple-account-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: max-content 20px;
     justify-content: center;
+    column-gap: 4px;   /* ← 지금보다 훨씬 가깝게 */
+    align-items: center;
 }
 
 .account-group {
@@ -492,20 +495,13 @@ body {
 }
 
 .last {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    text-align: left;
-    white-space: nowrap;
+  text-align: left;
 }
 
 .copy-btn {
-    display: inline;
-    margin-left: 0;
-    font-size: 12.6px;
-    cursor: pointer;
-    user-select: none;
-    color: #9a9a7b;
+    margin-left: 0;   /* 기존 6px 제거 */
+    width: 20px;
+    text-align: center;
 }
 
 .suite-text {
@@ -753,11 +749,8 @@ function copyAccount(account){
 
     <span class="num last">01 010
 
- <span class="copy-btn suite-text"
-          role="button"
-          tabindex="0"
-          onclick="copyAccount('334 095093 01 010')">❐</span>
-    </span>
+<button class="copy-btn suite-text" role="button"
+              tabindex="0" onclick="copyAccount('334 095093 01 010')">❐</button>
     </div>
 
 
@@ -770,13 +763,10 @@ function copyAccount(account){
     <span class="num first">164</span>
     <span class="num second">910436</span>
 
-    <span class="num last">89707
+    <span class="num last">89707</span>
 
- <span class="copy-btn suite-text"
-          role="button"
-          tabindex="0"
-          onclick="copyAccount('164 910436 89707')">❐</span>
-          </span>
+    <button class="copy-btn suite-text" role="button"
+              tabindex="0" onclick="copyAccount('164 910436 89707')">❐</button>
 
 
 </div>
