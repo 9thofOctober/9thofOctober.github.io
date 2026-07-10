@@ -101,6 +101,11 @@
       clear: both !important; 
       float: none !important;
     }
+	
+	.flip-clock-wrapper,
+.flip-clock-wrapper *{
+    font-family:'SUITE', sans-serif !important;
+}
     }
 
     /* 화면이 아주 작은 구형 스마트폰 대응 글자 크기 최적화 수식 */
@@ -458,24 +463,25 @@ body{
 
 }
 
-.simple-account-row{
-
-    display:flex;
-
-    justify-content:center;
-
-    margin:20px 0;
-
+.simple-account-row {
+  display: grid;
+  grid-template-columns: 1fr 32px;
+  align-items: center;
 }
 
-.account-group{
+.account-group {
+  display: grid;
+  grid-template-columns: 40px 40px 40px 45px 75px 1fr;
+  align-items: center;
+}
 
-    display:inline-flex;
+.first,
+.second {
+  text-align: center;
+}
 
-    align-items:center;
-
-    gap:6px;
-
+.last {
+  text-align: left;
 }
 
 .copy-btn{
@@ -734,15 +740,14 @@ function copyAccount(account){
 <div class="simple-account-row">
 
     <div class="account-group">
+    <span class="category">신랑</span>
+    <span class="name">이재환</span>
+    <span class="bank">기업</span>
+    <span class="num first">334</span>
+    <span class="num second">095093</span>
+    <span class="num last">01 010</span>
 
-        <span class="account-text">
-            신랑 이재환 기업 334 095093 01 010
-        </span>
-
-        <span class="copy-btn"
-              onclick="copyAccount('334 095093 01 010')">
-            ❐
-        </span>
+    <button class="copy-btn" onclick="copyAccount('334 095093 01 010')">❐</button>
 
     </div>
 
@@ -751,10 +756,14 @@ function copyAccount(account){
 <div class="simple-account-row">
 
     <div class="account-group">
+    <span class="category">신부</span>
+    <span class="name">김한결</span>
+    <span class="bank">하나</span>
+    <span class="num first">164</span>
+    <span class="num second">910436</span>
+    <span class="num last">89707</span>
 
-        <span class="account-text">
-            신부 김한결 하나&nbsp;164 910436 89707 &nbsp;&nbsp;</span><span class="copy-btn"
-              onclick="copyAccount('164 910436 89707')">❐ </span>
+    <button class="copy-btn" onclick="copyAccount('164 910436 89707')">❐</button>
 
     </div>
 
