@@ -436,6 +436,11 @@ body{
   display: none;
 }
 
+body {
+    font-family:'SUITE',sans-serif;
+    color:#9a9a7b;
+}
+
 .account-section{
 
     width:100%;
@@ -484,27 +489,16 @@ body{
   text-align: left;
 }
 
-.copy-btn{
-
+.copy-btn {
     display:inline-block;
-
     margin-left:6px;
-
-    color:#9a9a7b;
-
-    font-family:'SUITE',sans-serif;
-
     font-size:18px;
-
     line-height:1;
-
     cursor:pointer;
-
     user-select:none;
-
     transition:.2s;
-
 }
+
 
 .copy-btn:hover{
 
@@ -747,8 +741,7 @@ function copyAccount(account){
     <span class="num second">095093</span>
     <span class="num last">01 010</span>
 
-    <button class="copy-btn" onclick="copyAccount('334 095093 01 010')">❐</button>
-
+<button class="copy-btn suite-text" onclick="copyAccount('334 095093 01 010')">❐</button>
     </div>
 
 </div>
@@ -763,7 +756,7 @@ function copyAccount(account){
     <span class="num second">910436</span>
     <span class="num last">89707</span>
 
-    <button class="copy-btn" onclick="copyAccount('164 910436 89707')">❐</button>
+    <button class="copy-btn suite-text" onclick="copyAccount('164 910436 89707')">❐</button>
 
     </div>
 
