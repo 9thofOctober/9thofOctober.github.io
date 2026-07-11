@@ -86,7 +86,7 @@
 	.mobile-center-box img.transport-image {
     width: 88% !important;
     max-width: 480px !important;
-    margin-bottom: 0 auto !important;
+    margin-bottom: 0 !important;
 }
 
 	.mobile-center-box img.transport-image02 {
@@ -94,24 +94,12 @@
     max-width: 480px !important;
     margin-bottom: 300px !important;
 }
-
-    .flip-clock {
-      display: flex !important;
-      justify-content: center !important; /* 💡 타이머 내부 세트들을 정중앙으로 밀집 */
-      align-items: center !important;
-      width: 100% !important;
-      margin: 20px 0 auto !important; /* 💡 타이머 자체를 가로 한가운데 고정 */
-      font-size: 2.2rem;
-	  display: flex !important;
-      clear: both !important; 
-      float: none !important;
-    }
 	
 	.flip-clock-wrapper,
 .flip-clock-wrapper *{
     font-family:'SUITE', sans-serif !important;
 }
-    }
+
 
     /* 화면이 아주 작은 구형 스마트폰 대응 글자 크기 최적화 수식 */
     @media (max-width: 360px) {
@@ -289,7 +277,6 @@
 }
 
 
-
 .map-wrapper {
     padding-top: 14px;
     width: 70%;
@@ -392,7 +379,7 @@ body{
     align-items:center;
     scroll-snap-align:center;
 }
-
+}
 </style>
   
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css">
@@ -440,7 +427,7 @@ body {
     width:100%;
     max-width:420px;
 
-    margin:80px auto 50px;
+    margin:30px auto 50px;
 
     font-family:'SUITE',sans-serif;
 	font-size:12.6px;
@@ -469,7 +456,7 @@ body {
     grid-template-columns: max-content 20px;
     justify-content: center;
     align-items: center;
-    column-gap: 0,5px;
+    column-gap: 0.5px;
 }
 
 
@@ -744,7 +731,7 @@ function copyAccount(account){
 
 
     <div class="mobile-center-box">
-      <img src="./images/Registry.jpg" alt="Registry style=">
+      <img src="./images/Registry.jpg" alt="Registry">
     </div>
 
 <section class="account-section">
