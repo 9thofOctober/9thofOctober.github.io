@@ -420,16 +420,19 @@ body {
 
 
 .account-section{
-
     width:100%;
     max-width:420px;
+    margin:80px auto 50px;
+    font-family:'SUITE', sans-serif;
+    font-size:15px;
+    font-weight:400;
+}
 
-    margin:0px auto 50px;
 
-    font-family:'SUITE',sans-serif;
-	font-size:12.6px;
-	font-weight:400;
-
+@media (max-width:600px){
+    .account-section{
+        font-size:12.6px;
+    }
 }
 
 .account-title{
@@ -459,7 +462,7 @@ body {
 
 .account-group {
   display: grid;
-  grid-template-columns: 29px 35px 29px 108px;
+  grid-template-columns: 29px 33px 29px 22px 54px 42px;
   align-items: center;
   white-space: nowrap;
   
@@ -738,7 +741,10 @@ function copyAccount(account){
     <div class="account-group">
     <span class="category">신랑</span>
     <span class="name">이재환</span>
-    <span class="bank">기업 334 095093 01 010</span>
+    <span class="bank">기업</span>
+    <span class="num first">334</span>
+    <span class="num second">095093</span>
+    <span class="num last">01 010</span>
     </div>
 
 <button class="copy-btn suite-text" onclick="copyAccount('334 095093 01 010')">❐</button>
@@ -748,12 +754,15 @@ function copyAccount(account){
 <div class="simple-account-row">
 
     <div class="account-group">
-    <span class="category">혼주</span>
-    <span class="name">윤희경</span>
-    <span class="bank">농협 211077 52 003755</span>
+    <span class="category">신부</span>
+    <span class="name">김한결</span>
+    <span class="bank">하나</span>
+    <span class="num first">164</span>
+    <span class="num second">910436</span>
+    <span class="num last">89707</span>
 </div>
 
-    <button class="copy-btn suite-text" onclick="copyAccount('211077 52 003755')">❐</button>
+    <button class="copy-btn suite-text" onclick="copyAccount('164 910436 89707')">❐</button>
 
 
 </div>
