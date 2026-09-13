@@ -1028,10 +1028,11 @@ noticeTab.addEventListener('click', function() {
     noticeModal.style.display = 'flex';
     noticeTab.style.display = 'none';
 });
-
-noticeTab.addEventListener('click', function() {
-    noticeModal.style.display = 'flex';
-    noticeTab.style.display = 'none';
+noticeModal.addEventListener('click', function(e) {
+    if (e.target === noticeModal) {
+        noticeModal.style.display = 'none';
+        noticeTab.style.display = 'block';
+    }
 });
 </script>
 </body>
