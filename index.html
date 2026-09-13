@@ -3,9 +3,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
    <title>재환 그리고 한결</title>
-   
-<link href="https://jsdelivr.net" rel="stylesheet">
-<link href="https://googleapis.com" rel="stylesheet">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="재환 그리고 한결"> 
@@ -19,76 +16,6 @@
 
   <style>
   
-.modal-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-/* 2. 이미지 팝업 박스 구역 */
-.modal-image-wrap {
-    max-width: 85%;
-    cursor: pointer;
-}
-
-.modal-image-wrap img {
-    display: block;
-    width: 100%;
-    max-width: 420px;
-    border-radius: 12px;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-}
-
-/* 3. 하단 [닫기] 버튼 스타일 */
-.btn-close-text {
-    font-family: 'SUITE', sans-serif;
-    background: none; 
-    border: none;
-    color: #9a9a7b; /* 요청하신 닫기 색상 */
-    margin-top: 20px; 
-    font-size: 16px; 
-    font-weight: 600; 
-    cursor: pointer;
-    text-decoration: underline; 
-    letter-spacing: 0.5px;
-}
-
-/* 4. 두 줄짜리 영문 버튼 스타일 (줄간격 수정 버전) */
-.btn-reopen {
-    font-family: 'Stalemate', cursive, sans-serif;
-    background: #fff; 
-    border: 1px solid #e0d0cf; 
-    border-radius: 8px;
-    padding: 12px 28px; 
-    cursor: pointer;
-    line-height: 0.8 !important; /* 줄간격 대폭 축소 */
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    display: block;
-    margin: 20px auto;
-    transition: background 0.2s, transform 0.1s;
-}
-
-/* 내부 글자 색상 및 폰트 강제 고정 */
-.btn-reopen .color-target {
-    font-family: 'Stalemate', cursive, sans-serif !important;
-    color: #b57971 !important; /* 요청하신 버튼 글자 색상 */
-    font-size: 38px;
-    display: inline-block;
-    line-height: 0.9 !important;
-}
-
-.btn-reopen:hover {
-    background: #faf6f5;
-}
-.btn-reopen:active {
-    transform: scale(0.98);
-}
-	
   body{
     font-family:'SUITE', sans-serif;
 }
@@ -644,6 +571,134 @@ body {
 }
 
 
+.notice-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.notice-content {
+    position: relative;
+
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.notice-content img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
+
+    object-fit: contain;
+
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+}
+
+
+.notice-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+
+    z-index: 2;
+
+    width: 52px;
+    height: 32px;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 16px;
+
+    background: rgba(255, 255, 255, 0.75);
+
+    font-family: 'SUITE', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 32px;
+
+    color: #5c5c47;
+
+    cursor: pointer;
+}
+
+
+.notice-tab {
+    position: fixed;
+
+    right: 0;
+    top: 58%;
+
+    z-index: 99998;
+
+    display: none;
+
+    width: 38px;
+    min-height: 82px;
+
+    padding: 8px 6px;
+
+    border: none;
+    border-radius: 10px 0 0 10px;
+
+    background: rgba(92, 92, 71, 0.75);
+    color: #F9F6EF;
+
+    font-family: 'SUITE', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.3;
+
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+
+    cursor: pointer;
+}
+
+
+@media (max-width: 600px) {
+
+    .notice-modal {
+        padding: 15px;
+    }
+
+    .notice-close {
+        top: 6px;
+        right: 6px;
+
+        width: 52px;
+        height: 30px;
+
+        font-size: 13px;
+        line-height: 30px;
+    }
+
+    .notice-tab {
+        width: 36px;
+        min-height: 78px;
+
+        font-size: 12px;
+    }
+}
+
 </style>
 
 <script>
@@ -692,10 +747,14 @@ function copyAccount(account){
 
 <body>
 
-<button class="btn-reopen" onclick="openModal()">
-    <span class="color-target">Improtant</span><br>
-    <span class="color-target">Information</span>
-</button>
+<div id="noticeModal" class="notice-modal">
+  <div class="notice-content">
+    <button id="noticeClose" class="notice-close" type="button">닫기</button>
+    <img src="./images/important information.jpg" alt="안내사항">
+  </div>
+</div>
+
+<button id="noticeTab" class="notice-tab" type="button">안내사항</button>
 
   <div class="main-wrapper">
 
@@ -799,9 +858,10 @@ function copyAccount(account){
     <img src="./images/weddingcarimage.jpg" alt="weddingcarimage" class="transport-image">
 </div>
 <div class="mobile-center-box">
-    <img src="./images/지하철차량.jpg"
-         alt="지하철차량"
-         class="transport-image02 style="margin-bottom:100px !important;">
+   <img src="./images/지하철차량.jpg"
+     alt="지하철차량"
+     class="transport-image02"
+     style="margin-bottom:100px !important;">
 </div>
 
 <div class="mobile-center-box">
@@ -953,27 +1013,21 @@ function updateCard(cardId, newValue) {
 
     tick();
     const intervalId = setInterval(tick, 1000);
-    <div class="modal-overlay" id="githubModal">
-        <div class="modal-image-wrap" onclick="goToGitHub()">
-            <img src="important%20information.jpg" alt="중요 안내 사항">
-        </div>
-        <button class="btn-close-text" onclick="closeModal()">닫기</button>
-    </div>
-    <!-- ────────────────────────────────────────────────────────── -->
+  </script>
+  <script>
+const noticeModal = document.getElementById('noticeModal');
+const noticeClose = document.getElementById('noticeClose');
+const noticeTab = document.getElementById('noticeTab');
 
-    <script>
-        function closeModal() {
-            document.getElementById('githubModal').style.display = 'none';
-        }
+noticeClose.addEventListener('click', function() {
+    noticeModal.style.display = 'none';
+    noticeTab.style.display = 'block';
+});
 
-        function openModal() {
-            document.getElementById('githubModal').style.display = 'flex';
-        }
-
-        function goToGitHub() {
-            window.open('https://github.com', 'GitHubAuth', 'width=500,height=600,top=100,left=100');
-            closeModal(); 
-        }
-    </script>
-    </body>
+noticeTab.addEventListener('click', function() {
+    noticeModal.style.display = 'flex';
+    noticeTab.style.display = 'none';
+});
+</script>
+</body>
 </html>
